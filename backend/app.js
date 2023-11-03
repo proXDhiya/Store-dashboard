@@ -2,7 +2,10 @@
 require('dotenv').config();
 
 // Load express config file
-const app = require('./express.config');
+const app = require('./config/express/express.config');
+
+// set health check route
+app.use('/health', require('./config/health/health.config'));
 
 // Start server
 const port = app.get('port');
