@@ -5,12 +5,17 @@ const logger = require('morgan');
 
 const app = express();
 
+// Configure express app
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(logger('dev'));
 app.use(cors());
 
+// set health check route
+app.use('/health', require('./health.config'));
+
+// Set express app port
 app.set('port', process.env.PORT || 3000);
 
 module.exports = app;
